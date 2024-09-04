@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<h3>Update User</h3>
+	<form action="#" th:action="@{/user/updateuser}" th:object="${user}" enctype="multipart/form-data" method="post">
+	<input type="text" hidden="true" th:field="*{id}" id="id" >
+		<label for="name">Name</label>
+		<input type="text"  th:field="*{name}" id="name" placeholder="Name">
+		<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+		<label for="email">Email</label>
+		<input type="email" th:field="*{email}" id="email" disabled="" placeholder="Email">
+		<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+
+		<label for="userName">User name</label>
+		<input type="text" th:field="*{userName}" id="userName" disabled="" placeholder="User Name">
+		<span th:if="${#fields.hasErrors('userName')}" th:errors="userName"></span>
+
+		
+		<label for="password">Profile Picture</label>
+		 <input type="file" name="image" id="image" accept="image/*" class="form-control-file">
+		<input type="submit" value="Update User">
+	</form>
+</body>
+</html>
