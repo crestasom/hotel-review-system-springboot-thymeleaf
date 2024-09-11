@@ -1,8 +1,14 @@
 package com.cretasom.hrs.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class User {
 
 	private int id;
+	@NotBlank(message = "Name cannot be empty")
+	@Pattern(regexp = "^[A-Za-z]{3,}", message = "Name should be atleast 3 char and only contain letters")
+
 	private String name;
 	private String email;
 	private String userName;

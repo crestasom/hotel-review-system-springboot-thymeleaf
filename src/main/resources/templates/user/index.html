@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
+	<img src="/image/image.jpg" alt="some image should appear here"/>
 	<div th:switch="${users}">
 		<h2 th:case="null">No users yet!</h2>
 		<h2 th:case="${#lists.isEmpty(list)}">No users yet!</h2>
