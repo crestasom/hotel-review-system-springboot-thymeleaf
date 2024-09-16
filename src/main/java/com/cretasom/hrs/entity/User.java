@@ -1,10 +1,16 @@
 package com.cretasom.hrs.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+@Entity
+@Table(name = "users")
 public class User {
 
+	@Id
 	private int id;
 	@NotBlank(message = "Name cannot be empty")
 	@Pattern(regexp = "^[A-Za-z]{3,}", message = "Name should be atleast 3 char and only contain letters")
@@ -52,6 +58,12 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", userName=" + userName + ", password="
+				+ password + "]";
 	}
 
 }

@@ -1,11 +1,12 @@
 package com.cretasom.hrs.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cretasom.hrs.entity.User;
+import com.cretasom.hrs.repo.UserRepository;
 import com.cretasom.hrs.service.UserService;
 
 @Service
@@ -15,42 +16,36 @@ public class UserServiceImpl implements UserService {
 		System.out.println("UserServiceImpl created");
 	}
 
-	List<User> userList = new ArrayList<>();
-
-	int id = 1;
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public void addUser(User user) {
-
-		user.setId(id);
-		id++;
-		userList.add(user);
-
+		userRepo.save(user);
 	}
 
 	@Override
 	public void updateUser(User user) {
-		User user1 = userList.get(user.getId() - 1);
-		user1.setName(user.getName());
+		userRepo.save(user);
 
 	}
 
 	@Override
 	public void deleteUser(int id) {
-		userList.remove(id - 1);
+		userRepo.deleteById(id);
 
 	}
 
 	@Override
 	public List<User> getAllUser() {
 		// TODO Auto-generated method stub
-		return userList;
+		return userRepo.findAll();
 	}
 
 	@Override
 	public User getUserById(int id) {
 		// TODO Auto-generated method stub
-		return userList.get(id - 1);
+		return userRepo.findById(id).get();
 	}
 
 }
