@@ -2,7 +2,10 @@ package com.cretasom.hrs.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cretasom.hrs.entity.User;
@@ -11,9 +14,13 @@ import com.cretasom.hrs.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	public UserServiceImpl() {
-		System.out.println("UserServiceImpl created");
+		logger.info("UserServiceImpl created ");
 	}
 
 	@Autowired
@@ -21,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addUser(User user) {
+		System.out.println("encoding user password");
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		System.out.println("encoding user password done");
 		userRepo.save(user);
 	}
 

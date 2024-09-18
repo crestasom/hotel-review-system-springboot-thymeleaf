@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<h3>Add Rating</h3>
+	<form action="#" th:action="@{/rating/addrating}" th:object="${rating}" method="post">
+		<label for="hotelCategoryId">Hotel</label>
+		
+		<select th:field="*{hotelId}" id="hotelId">
+			<option th:each="hotel : ${hotels}" th:value="${hotel.id}" th:text="${hotel.name}" />
+			
+		</select>
+		
+		<select th:field="*{userId}" id="userId">
+			<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.name}" />
+			
+		</select>
+		<span th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}" />
+
+		<label for="rating">Rating</label>
+		<input type="number" th:field="*{rating}" id="rating" placeholder="0">
+		<span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}" />
+		<label for="comment">Comment</label>
+		<input type="text" th:field="*{comment}" id="comment" placeholder="Comment">
+		<span th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" />
+		<input type="submit" value="Add Rating">
+	</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function fetchHotels() {
+    	var hotelCategoryId=document.getElementById('hotelCategoryId').value;
+        $.ajax({
+            url: '/hotel/fetch/'+hotelCategoryId,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                const dropdown = $("#hotelId");
+                dropdown.empty(); // Clear existing options
+                data.forEach(option => {
+                    dropdown.append(new Option(option.name, option.id));
+                });
+            },
+            error: function(error) {
+                console.log("Error loading dropdown:", error);
+            }
+        });
+    }
+</script>
+
+</html>

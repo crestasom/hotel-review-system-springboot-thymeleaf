@@ -1,9 +1,12 @@
 package com.cretasom.hrs.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
+@Entity
 public class Hotel {
-
+	@Id
 	private int id;
 
 	@NotBlank(message = "Name is mandatory")
