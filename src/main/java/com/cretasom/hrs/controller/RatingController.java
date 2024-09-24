@@ -1,5 +1,7 @@
 package com.cretasom.hrs.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +38,14 @@ public class RatingController {
 	public String addRating(Rating rating) {
 		// TODO: process POST request
 		ratingServiceImpl.addRating(rating);
-		return "redirect://rating/";
+		return "redirect:/rating/index";
+	}
+
+	@GetMapping({ "/index", "", "/" })
+	public String showRatingList(Model model) {
+		List<Rating> ratings = ratingServiceImpl.getAll();
+		model.addAttribute("ratings", ratings.isEmpty() ? null : ratings);
+		return "rating/index";
 	}
 
 }

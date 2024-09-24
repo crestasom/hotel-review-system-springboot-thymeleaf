@@ -7,22 +7,25 @@
 <body>
 	<div>
 		<img src="image/images.jpg" alt="Italian Trulli">
+		
+		
 		<p>
 			<a class="link_button" href="/logout">Logout</a>
 		</p>
-		<div>
+		<div sec:authorize="hasRole('ADMIN')">
 			<p>
 				<a class="link_button" href="/user/">User list</a>
 			</p>
 			<p>
-				<a class="link_button" href="/hotel">Hotel list</a>
+				<a class="link_button" href="/hotel/">Hotel list</a>
 			</p>
 		</div>
-		<div>
+		<div sec:authorize="hasRole('USER')">
 			<p>
-				<a class="link_button" href="/rating">Rating list</a>
+				<a class="link_button" href="/rating/">Rating list</a>
 			</p>
 		</div>
 	</div>
 </body>
 </html>
+ 

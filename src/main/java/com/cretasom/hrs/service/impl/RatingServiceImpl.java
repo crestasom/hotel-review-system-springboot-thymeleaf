@@ -3,6 +3,8 @@ package com.cretasom.hrs.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.cretasom.hrs.entity.Hotel;
@@ -22,7 +24,10 @@ public class RatingServiceImpl {
 	UserRepository userService;
 
 	public Rating addRating(Rating r) {
-		User user = userService.findById(r.getUserId()).get();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userName = auth.getName();
+		User user = userService.findByUserName(userName);
+		// User user = userService.findById(r.getUserId()).get();
 		Hotel hotel = hotelService.findById(r.getHotelId()).get();
 		r.setHotel(hotel);
 		r.setUser(user);
