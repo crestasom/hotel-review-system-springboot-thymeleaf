@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
@@ -24,9 +25,11 @@ public class User implements UserDetails {
 	@Id
 	private int id;
 	@NotBlank(message = "Name cannot be empty")
-	@Pattern(regexp = "^[A-Za-z]{3,}", message = "Name should be atleast 3 char and only contain letters")
+	@Pattern(regexp = "^[A-Za-z 0-9]{3,}", message = "Name should be atleast 3 char and only contain letters")
 
 	private String name;
+//	@NotBlank(message = "Email is mandatory")
+	@Email(message = "Invalid email")
 	private String email;
 	private String userName;
 	private String password;

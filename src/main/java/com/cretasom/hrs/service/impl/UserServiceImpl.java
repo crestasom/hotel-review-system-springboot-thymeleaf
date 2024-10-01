@@ -27,11 +27,12 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepo;
 
 	@Override
-	public void addUser(User user) {
+	public User addUser(User user) {
 		System.out.println("encoding user password");
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+
 		System.out.println("encoding user password done");
-		userRepo.save(user);
+		return userRepo.save(user);
 	}
 
 	@Override

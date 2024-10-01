@@ -6,7 +6,7 @@ import com.cretasom.hrs.entity.User;
 
 public interface UserService {
 
-	void addUser(User user);
+	User addUser(User user);
 
 	void updateUser(User user);
 
